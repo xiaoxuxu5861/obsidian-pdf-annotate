@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">PDF Annotate 桌面与平板界面示意</title>
+  <desc id="desc">桌面和平板上的 PDF 高亮、手写与页边批注示意图，并非真实截图。</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#17192f"/><stop offset="1" stop-color="#39305f"/></linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="17" stdDeviation="19" flood-color="#080919" flood-opacity=".32"/></filter>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0V36" fill="none" stroke="#fff" stroke-opacity=".05"/></pattern>
+  </defs>
+  <rect width="1200" height="630" rx="30" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="30" fill="url(#grid)"/>
+  <circle cx="1060" cy="-50" r="300" fill="#a98aff" opacity=".08"/>
+  <circle cx="50" cy="600" r="280" fill="#5ac8f5" opacity=".06"/>
+  <rect x="68" y="42" width="46" height="46" rx="13" fill="#a789ff"/>
+  <path d="M82 54h16l6 6v18H82zM98 54v7h6M86 70l4 4 9-11" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <g font-family="Arial, sans-serif">
+    <text x="128" y="75" fill="#fff" font-size="30" font-weight="700">PDF Annotate</text>
+    <text x="69" y="128" fill="#d6d1ed" font-size="19">Read. Mark. Write. Share.</text>
+    <rect x="928" y="47" width="200" height="36" rx="18" fill="#fff" fill-opacity=".1" stroke="#fff" stroke-opacity=".2"/>
+    <text x="948" y="70" fill="#f2edff" font-size="12" font-weight="700">DESKTOP  ·  TABLET</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="65" y="171" width="751" height="381" rx="18" fill="#ece9f6"/>
+    <path d="M83 171h715a18 18 0 0 1 18 18v38H65v-38a18 18 0 0 1 18-18z" fill="#f1eef9"/>
+    <circle cx="91" cy="199" r="5" fill="#f58990"/><circle cx="109" cy="199" r="5" fill="#f3c45f"/><circle cx="127" cy="199" r="5" fill="#79d8ab"/>
+    <rect x="160" y="187" width="250" height="23" rx="7" fill="#fff"/>
+    <text x="174" y="203" fill="#5c5971" font-family="Arial, sans-serif" font-size="12">research-paper.pdf</text>
+    <rect x="90" y="242" width="701" height="42" rx="11" fill="#fff"/>
+    <g fill="none" stroke="#766e8e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M114 253v19m0-19 10 3v16l-10-3-10 3v-16zM157 262h18m-8-9 9 9-9 9M204 271l12-18 8 6-12 18-10 2zM250 271l12-18 8 6-12 18-10 2zM302 260l11-9 11 9-12 13h-11z"/>
+    </g>
+    <rect x="195" y="247" width="39" height="31" rx="7" fill="#9275ed" opacity=".2"/>
+    <circle cx="378" cy="263" r="10" fill="#f8d45d"/><circle cx="407" cy="263" r="10" fill="#85dfaf"/><circle cx="436" cy="263" r="10" fill="#83baf9"/><circle cx="465" cy="263" r="10" fill="#efa2da"/>
+    <rect x="550" y="258" width="128" height="7" rx="3.5" fill="#e4e0ee"/><circle cx="602" cy="261.5" r="11" fill="#9a80ef" stroke="#fff" stroke-width="3"/>
+    <rect x="694" y="249" width="81" height="27" rx="7" fill="#f5f3fb"/><text x="712" y="267" fill="#777188" font-family="Arial, sans-serif" font-size="11">Export ↗</text>
+    <rect x="89" y="298" width="484" height="231" rx="5" fill="#fff"/>
+    <text x="123" y="334" fill="#302d43" font-family="Arial, sans-serif" font-size="20" font-weight="700">Ideas worth keeping</text>
+    <g fill="#cbc9d3"><rect x="123" y="354" width="322" height="6" rx="3"/><rect x="123" y="370" width="381" height="6" rx="3"/><rect x="123" y="402" width="372" height="6" rx="3"/><rect x="123" y="418" width="285" height="6" rx="3"/></g>
+    <rect x="123" y="386" width="345" height="6" rx="3" fill="#f6d66c"/>
+    <path d="M159 458c32-28 58 30 94-5 34-32 49 28 78 3 17-15 27-15 43-6" fill="none" stroke="#7564e4" stroke-width="6" stroke-linecap="round"/>
+    <rect x="589" y="317" width="190" height="100" rx="12" fill="#fff" stroke="#e6e0f4"/>
+    <rect x="589" y="317" width="190" height="26" rx="12" fill="#fff1ba"/>
+    <text x="604" y="335" fill="#65543a" font-family="Arial, sans-serif" font-size="11" font-weight="700">NOTE 01</text>
+    <text x="604" y="367" fill="#39364a" font-family="Arial, sans-serif" font-size="12">A useful point to revisit.</text>
+    <rect x="604" y="381" width="148" height="5" rx="2.5" fill="#d8d5e1"/><rect x="604" y="393" width="112" height="5" rx="2.5" fill="#d8d5e1"/>
+    <path d="M470 389c53-5 72-38 119-34" fill="none" stroke="#c6a44b" stroke-width="2" stroke-dasharray="5 5"/>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="834" y="153" width="313" height="418" rx="29" fill="#151827" stroke="#9089a9" stroke-width="4"/>
+    <rect x="847" y="166" width="287" height="392" rx="18" fill="#f8f7fb"/>
+    <path d="M865 166h251a18 18 0 0 1 18 18v25H847v-25a18 18 0 0 1 18-18z" fill="#eeeaf6"/>
+    <text x="864" y="193" fill="#4a4560" font-family="Arial, sans-serif" font-size="11" font-weight="700">PDF ANNOTATE</text>
+    <rect x="860" y="222" width="261" height="42" rx="11" fill="#fff" stroke="#e7e4f0"/>
+    <g fill="none" stroke="#766e8e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M877 235v17m0-17 9 3v14l-9-3-9 3v-14zM910 250l10-15 8 5-10 15zM953 249l10-15 8 6-10 15zM996 242h15m-7-7v15"/></g>
+    <rect x="900" y="228" width="36" height="31" rx="7" fill="#9477ed" opacity=".2"/>
+    <circle cx="1050" cy="243" r="9" fill="#f8d45e"/><circle cx="1077" cy="243" r="9" fill="#89bfff"/><circle cx="1104" cy="243" r="9" fill="#ed9ed6"/>
+    <rect x="861" y="279" width="259" height="263" rx="3" fill="#fff"/>
+    <text x="881" y="313" fill="#393449" font-family="Arial, sans-serif" font-size="16" font-weight="700">Notes on the page</text>
+    <g fill="#d5d2dc"><rect x="881" y="336" width="202" height="5" rx="2.5"/><rect x="881" y="350" width="220" height="5" rx="2.5"/><rect x="881" y="378" width="213" height="5" rx="2.5"/></g>
+    <rect x="881" y="364" width="182" height="5" rx="2.5" fill="#f7dc72"/>
+    <path d="M894 447c24-47 48 47 76-4 22-39 44 35 74-1 11-13 29-12 43-18" fill="none" stroke="#7d69e8" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="1089" cy="453" r="14" fill="none" stroke="#635b77" stroke-width="2" stroke-dasharray="3 3"/>
+  </g>
+  <text x="69" y="599" fill="#bdb8d8" font-family="Arial, sans-serif" font-size="13">ANNOTATE ACROSS SCREENS</text>
+  <text x="1052" y="599" fill="#bdb8d8" font-family="Arial, sans-serif" font-size="13">v0.2.39</text>
+</svg>
