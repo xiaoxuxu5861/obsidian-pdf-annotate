@@ -29,6 +29,7 @@ function setup(isMobile, runtimeWindow = {}) {
       this.drawing = null;
     }
     onMouseUp() { this.mouseUps = (this.mouseUps || 0) + 1; }
+    onDocMouseMove(event) { this.cursorPosition = [event.clientX, event.clientY]; }
     penPoint(canvas, event) { return { x: event.clientX / 100, y: event.clientY / 100 }; }
     applyEraseMask() { this.maskCount = (this.maskCount || 0) + 1; }
     redrawPenPage() { this.redrawn = true; }
@@ -260,6 +261,45 @@ test('desktop eraser gathers the whole drag and saves it on pointer up', () => {
   overlay.onPenUp(target, 0, pointer(1, 'mouse', 90, 20));
   assert.ok(overlay.finishedErase.length > 2);
   assert.equal(overlay.eraseSession, null);
+});
+
+test('desktop eraser drags across PDF text layers and commits on document pointer up', () => {
+  const { Overlay } = setup(false);
+  const overlay = new Overlay();
+  const original = { id: 'stroke', type: 'pen', page: 1, width: 2,
+    points: [{ x: .1, y: .2 }, { x: .9, y: .2 }] };
+  Object.assign(overlay, { tool: 'eraser', eraserSize: 12, readMode: false,
+    destroyed: false, doc: { items: [original] }, eraseCircles: [] });
+  overlay.finishErase = function () {
+    this.finishedErase = this.eraseCircles.slice();
+    this.committed = this.applyEraseToData(1, this.finishedErase);
+    this.eraseSession = null;
+  };
+  const document = { listeners: {},
+    addEventListener(type, callback) { (this.listeners[type] ||= []).push(callback); },
+    dispatch(type, event) { for (const callback of this.listeners[type] || []) callback(event); },
+  };
+  const { page, target } = pageCanvas();
+  target.ownerDocument = document;
+  overlay.bindPenEvents(target, 0);
+  const textLayer = { closest: () => null };
+  const event = (type, x) => {
+    const value = pointer(4, 'mouse', x, 20);
+    value.button = 0;
+    value.target = textLayer;
+    value.stopPropagation = () => {};
+    if (type === 'pointerdown') page.dispatch(type, value);
+    else document.dispatch(type, value);
+  };
+  event('pointerdown', 10);
+  assert.equal(overlay.eraseSession.pointerId, 4);
+  event('pointermove', 50);
+  assert.deepEqual(overlay.cursorPosition, [50, 20]);
+  event('pointerup', 90);
+  assert.ok(overlay.finishedErase.length > 2);
+  assert.equal(overlay.committed, true);
+  assert.equal(overlay.eraseSession, null);
+  assert.equal(overlay.doc.items.some(item => item === original), false);
 });
 
 test('cancelled eraser drag restores the canvas without changing pen data', () => {

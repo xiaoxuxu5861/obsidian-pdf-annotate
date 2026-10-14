@@ -8,15 +8,60 @@
     canvas.addEventListener("pointermove", event => this.onPenMove(canvas, page, event));
     canvas.addEventListener("pointerup", event => this.onPenUp(canvas, page, event));
     canvas.addEventListener("pointercancel", event => this.onPenCancel(canvas, page, event));
+
+    // PDF text and link layers can sit above the ink canvas on desktop. Start
+    // erasing at the page, then follow the pointer even if it leaves that page.
+    if (it.Platform?.isMobile || !canvas.parentElement) return;
+    const pageEl = canvas.parentElement;
+    this.desktopEraserPages ??= new WeakMap();
+    let current = this.desktopEraserPages.get(pageEl);
+    if (current) {
+      current.canvas = canvas;
+      current.page = page;
+    } else {
+      current = { canvas, page };
+      this.desktopEraserPages.set(pageEl, current);
+      this.listen(pageEl, "pointerdown", event => {
+        if (this.destroyed || this.readMode || this.tool !== "eraser" ||
+            (event.button != null && event.button !== 0) ||
+            event.target?.closest?.(".da-native-box, .da-web-chapter-marker")) return;
+        event.stopPropagation();
+        this.onPenDown(current.canvas, current.page, event);
+      }, true);
+    }
+
+    if (this.desktopEraserDocument) return;
+    this.desktopEraserDocument = true;
+    const doc = canvas.ownerDocument || pageEl.ownerDocument;
+    this.listen(doc, "pointermove", event => {
+      const session = this.eraseSession;
+      if (!session || session.pointerId !== event.pointerId) return;
+      event.stopPropagation();
+      this.onDocMouseMove(event);
+      this.onPenMove(session.canvas, session.idx, event);
+    }, true);
+    this.listen(doc, "pointerup", event => {
+      const session = this.eraseSession;
+      if (!session || session.pointerId !== event.pointerId) return;
+      event.stopPropagation();
+      this.onPenUp(session.canvas, session.idx, event);
+    }, true);
+    this.listen(doc, "pointercancel", event => {
+      const session = this.eraseSession;
+      if (!session || session.pointerId !== event.pointerId) return;
+      event.stopPropagation();
+      this.onPenCancel(session.canvas, session.idx, event);
+    }, true);
   };
 
   const penDown = wn.prototype.onPenDown;
   wn.prototype.onPenDown = function (canvas, page, event) {
     if (this.destroyed || this.readMode) return;
     if (this.tool !== "eraser") return penDown.call(this, canvas, page, event);
-    if (this.eraseSession || !this.doc) return;
+    if (this.eraseSession || !this.doc || (event.button != null && event.button !== 0)) return;
     event.preventDefault();
-    canvas.setPointerCapture(event.pointerId);
+    // Document listeners keep the drag alive if PDF.js replaces the canvas.
+    try { canvas.setPointerCapture(event.pointerId); } catch {}
     this.eraseSession = { canvas, idx: page, pointerId: event.pointerId };
     this.eraseCircles = [];
     this.eraseLast = null;
@@ -59,7 +104,9 @@
       this.addErasePoint(canvas, this.penPoint(canvas, event));
     }
     penUp.call(this, canvas, page);
-    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    try {
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    } catch {}
   };
 
   wn.prototype.onPenCancel = function (canvas, page, event) {
